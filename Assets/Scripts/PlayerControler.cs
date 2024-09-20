@@ -6,7 +6,6 @@ public class PlayerControler : MonoBehaviour
 {
     private Rigidbody2D characterRigidbody;
     private float horizontalInput;
-    private bool jumpInput;
     [SerializeField]private float jumpForce = 5;
     [SerializeField]private float characterSpeed = 4.5f;    // "[SerializeField]" es para que se vea en el inspector //la f solo se pone con decimales
 
@@ -23,11 +22,10 @@ public class PlayerControler : MonoBehaviour
     void Update()
     {
         horizontalInput = Input.GetAxis("Horizontal");
-        jumpInput = Input.GetButtonDown("Jump");    //ButtonDown es para cuando lo pulsas
-
-        if(jumpInput == true)
+       
+        if(Input.GetButtonDown("Jump"))
         {
-            characterRigidbody.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+            characterRigidbody.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);   //ButtonDown es para cuando lo pulsas
         }
     }
 
