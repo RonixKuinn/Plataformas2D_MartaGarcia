@@ -22,6 +22,15 @@ public class PlayerControler : MonoBehaviour
     void Update()
     {
         horizontalInput = Input.GetAxis("Horizontal");
+
+        if(horizontalInput < 0)
+        {
+            transform.rotation = Quaternion.Euler(0, 180, 0);
+        }
+        else if(horizontalInput > 0)
+        {
+            transform.rotation = Quaternion.Euler(0, 0, 0);
+        }
        
         if(Input.GetButtonDown("Jump")/*para GroundSensor -->*/ && GroundSensor.isGrounded)
         {
