@@ -23,7 +23,7 @@ public class PlayerControler : MonoBehaviour
     {
         horizontalInput = Input.GetAxis("Horizontal");
        
-        if(Input.GetButtonDown("Jump"))
+        if(Input.GetButtonDown("Jump")/*para GroundSensor -->*/ && GroundSensor.isGrounded)
         {
             characterRigidbody.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);   //ButtonDown es para cuando lo pulsas
         }
