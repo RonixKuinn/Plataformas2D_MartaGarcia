@@ -9,6 +9,7 @@ public class PlayerControler : MonoBehaviour
     private float horizontalInput;
     [SerializeField]private float jumpForce = 5;
     [SerializeField]private float characterSpeed = 4.5f;    // "[SerializeField]" es para que se vea en el inspector //la f solo se pone con decimales
+    [SerializeField]private int healtPoints = 5;
 
     void Awake()
     {
@@ -52,13 +53,31 @@ public class PlayerControler : MonoBehaviour
     {
         characterRigidbody.velocity = new Vector2(horizontalInput * characterSpeed, characterRigidbody.velocity.y);   // (1,x) = (lados,arriva) <-- [hay que añadir new] // tambies se puede poner directamente la dirección "right"
     }
+    
+    void TakeDamage()
+        {
+            healtPoints--; // -- es para que se resten de uno en uno y si quieres más sería -= x
+            characterAnimator.SetTrigger("IsHurt");
+
+            if(healtPoints == 0)
+            {
+                Die();
+            }
+        }
+
+    void Die()
+    {
+        characterAnimator.SetBool("IsDead", true);
+        Destroy(gameObject, 0.7f);
+    }
 
     void OnCollisionEnter2D(Collision2D collision)
     {
         if(collision.gameObject.layer == 3)
         {
-            characterAnimator.SetTrigger("IsHurt");
-            //Destroy(gameObject, 0.7f);
+            TakeDamage();
         }
     }
+
+    
 }
