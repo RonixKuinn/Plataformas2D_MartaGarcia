@@ -27,7 +27,8 @@ public class GroundSensor : MonoBehaviour
     {
         if(collider.gameObject.layer == 6)
         {
-            isGrounded = true;
+            isGrounded = false;
+            PlayerControler.characterAnimator.SetBool("IsJumping", true);
         }
     }
 }
