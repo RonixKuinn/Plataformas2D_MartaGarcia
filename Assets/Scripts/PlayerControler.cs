@@ -53,5 +53,11 @@ public class PlayerControler : MonoBehaviour
         characterRigidbody.velocity = new Vector2(horizontalInput * characterSpeed, characterRigidbody.velocity.y);   // (1,x) = (lados,arriva) <-- [hay que añadir new] // tambies se puede poner directamente la dirección "right"
     }
 
-
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.layer == 3)
+        {
+            characterAnimator.SetTrigger("IsDead");
+        }
+    }
 }
