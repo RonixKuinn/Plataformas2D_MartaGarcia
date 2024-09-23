@@ -57,7 +57,8 @@ public class PlayerControler : MonoBehaviour
     {
         if(collision.gameObject.layer == 3)
         {
-            characterAnimator.SetTrigger("IsDead");
+            characterAnimator.SetTrigger("IsHurt");
+            //Destroy(gameObject, 0.7f);
         }
     }
 }
