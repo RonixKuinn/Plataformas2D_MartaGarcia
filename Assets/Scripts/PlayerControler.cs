@@ -7,6 +7,7 @@ public class PlayerControler : MonoBehaviour
     private Rigidbody2D characterRigidbody;
     public static Animator characterAnimator;
     private float horizontalInput;
+    private bool isAttacking;
     [SerializeField]private float jumpForce = 5;
     [SerializeField]private float characterSpeed = 4.5f;    // "[SerializeField]" es para que se vea en el inspector //la f solo se pone con decimales
     [SerializeField]private int healtPoints = 5;
@@ -24,6 +25,22 @@ public class PlayerControler : MonoBehaviour
 
     void Update()
     {
+        Movement();
+
+        if(Input.GetButtonDown("Jump")/*para GroundSensor -->*/ && GroundSensor.isGrounded && /*atacar -->*/ isAttacking == false)
+        {
+            Jump();
+        }
+
+        if(Input.GetButtonDown("Fire1") && GroundSensor.isGrounded)
+        {
+            Attack();
+        }
+        
+    }
+
+    void Movement()
+    {
         horizontalInput = Input.GetAxis("Horizontal");
 
         if(horizontalInput < 0)
@@ -40,13 +57,12 @@ public class PlayerControler : MonoBehaviour
         {
             characterAnimator.SetBool("IsRunning", false);
         }
-       
-        if(Input.GetButtonDown("Jump")/*para GroundSensor -->*/ && GroundSensor.isGrounded)
-        {
-            characterRigidbody.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);   //ButtonDown es para cuando lo pulsas
-            characterAnimator.SetBool("IsJumping", true);
-        }
-        
+    }
+
+    void Jump()
+    {
+        characterRigidbody.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);   //ButtonDown es para cuando lo pulsas
+        characterAnimator.SetBool("IsJumping", true);
     }
 
     void FixedUpdate()
@@ -54,14 +70,24 @@ public class PlayerControler : MonoBehaviour
         characterRigidbody.velocity = new Vector2(horizontalInput * characterSpeed, characterRigidbody.velocity.y);   // (1,x) = (lados,arriva) <-- [hay que añadir new] // tambies se puede poner directamente la dirección "right"
     }
     
+    void Attack()
+    {
+        characterAnimator.SetTrigger("Attack");
+
+    }
+
     void TakeDamage()
         {
             healtPoints--; // -- es para que se resten de uno en uno y si quieres más sería -= x
-            characterAnimator.SetTrigger("IsHurt");
+            
 
-            if(healtPoints == 0)
+            if(healtPoints <= 0)
             {
                 Die();
+            }
+            else
+            {
+                characterAnimator.SetTrigger("IsHurt"); 
             }
         }
 
