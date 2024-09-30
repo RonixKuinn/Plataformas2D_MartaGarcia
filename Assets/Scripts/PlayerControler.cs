@@ -27,12 +27,12 @@ public class PlayerControler : MonoBehaviour
     {
         Movement();
 
-        if(Input.GetButtonDown("Jump")/*para GroundSensor -->*/ && GroundSensor.isGrounded && /*atacar -->*/ isAttacking == false)
+        if(Input.GetButtonDown("Jump")/*para GroundSensor -->*/ && GroundSensor.isGrounded && /*no atacar cuando salte-->*/ isAttacking == false)
         {
             Jump();
         }
 
-        if(Input.GetButtonDown("Fire1") && GroundSensor.isGrounded)
+        if(Input.GetButtonDown("Fire1") && GroundSensor.isGrounded && isAttacking == false)
         {
             Attack();
         }
@@ -45,12 +45,20 @@ public class PlayerControler : MonoBehaviour
 
         if(horizontalInput < 0)
         {
+            if(isAttacking)
+            {
             transform.rotation = Quaternion.Euler(0, 180, 0);
+            }
+
             characterAnimator.SetBool("IsRunning", true);
         }
         else if(horizontalInput > 0)
         {
-            transform.rotation = Quaternion.Euler(0, 0, 0);
+            if(isAttacking)
+            {
+                transform.rotation = Quaternion.Euler(0, 0, 0);
+            }
+
             characterAnimator.SetBool("IsRunning", true);
         }
         else
@@ -67,13 +75,22 @@ public class PlayerControler : MonoBehaviour
 
     void FixedUpdate()
     {
-        characterRigidbody.velocity = new Vector2(horizontalInput * characterSpeed, characterRigidbody.velocity.y);   // (1,x) = (lados,arriva) <-- [hay que añadir new] // tambies se puede poner directamente la dirección "right"
+        characterRigidbody.velocity = new Vector2(horizontalInput * characterSpeed, characterRigidbody.velocity.y); // (1,x) = (lados,arriva) <-- [hay que añadir new] // tambien se puede poner directamente la dirección "right"
+
     }
     
     void Attack()
     {
+        StartCoroutine(AttackAnimation());      //llamar a co-rutina
         characterAnimator.SetTrigger("Attack");
+    }
 
+    //co-rutina para que no salte mientras ataca
+    IEnumerator AttackAnimation()
+    {
+        isAttacking = true;
+        yield return new WaitForSeconds(0.5f);
+        isAttacking = false;
     }
 
     void TakeDamage()
