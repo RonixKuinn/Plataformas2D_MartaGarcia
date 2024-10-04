@@ -11,6 +11,8 @@ public class PlayerControler : MonoBehaviour
     [SerializeField]private float jumpForce = 5;
     [SerializeField]private float characterSpeed = 4.5f;    // "[SerializeField]" es para que se vea en el inspector //la f solo se pone con decimales
     [SerializeField]private int healtPoints = 5;
+    [SerializeField]private Transform attackHitBox;
+    [SerializeField]private float attackRadius;
 
     void Awake()
     {
@@ -45,19 +47,19 @@ public class PlayerControler : MonoBehaviour
 
         if(horizontalInput < 0)
         {
-            if(isAttacking)
-            {
+            //if(isAttacking)
+            //{
             transform.rotation = Quaternion.Euler(0, 180, 0);
-            }
+            //}
 
             characterAnimator.SetBool("IsRunning", true);
         }
         else if(horizontalInput > 0)
         {
-            if(isAttacking)
-            {
+            //if(isAttacking)
+            //{
                 transform.rotation = Quaternion.Euler(0, 0, 0);
-            }
+            //}
 
             characterAnimator.SetBool("IsRunning", true);
         }
@@ -89,6 +91,19 @@ public class PlayerControler : MonoBehaviour
     IEnumerator AttackAnimation()
     {
         isAttacking = true;
+
+        yield return new WaitForSeconds(0.2f);
+        Collider2D[] collider = Physics2D.OverlapCircleAll(attackHitBox.position, attackRadius);
+        foreach(Collider2D enemy in collider)
+        {
+            if(enemy.gameObject.CompareTag("Mimico"))
+            {
+                //Destroy(enemy.gameObject);
+                Rigidbody2D enemyRigidbody = enemy.GetComponent<Rigidbody2D>();
+                enemyRigidbody.AddForce(transform.right + transform.up * 2, ForceMode2D.Impulse);
+            }
+        }
+        
         yield return new WaitForSeconds(0.5f);
         isAttacking = false;
     }
@@ -122,5 +137,12 @@ public class PlayerControler : MonoBehaviour
         }
     }
 
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(attackHitBox.position, attackRadius);
+    }
     
 }
+
+// Extension -- Night Pink (tiene murcielagos) // Pink Candy Theme (parece una nube rizada)
