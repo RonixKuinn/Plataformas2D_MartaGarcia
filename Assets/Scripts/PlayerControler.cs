@@ -50,9 +50,14 @@ public class PlayerControler : MonoBehaviour
             if(isAttacking)
             {
                 characterAnimator.SetTrigger("AttackAndRun");
+                characterAnimator.SetBool("IsRunning", false);
             }
-            transform.rotation = Quaternion.Euler(0, 180, 0);
-            characterAnimator.SetBool("IsRunning", true);
+            else
+            {
+                transform.rotation = Quaternion.Euler(0, 180, 0);
+                characterAnimator.SetBool("IsRunning", true);
+            }
+            
         }
         else if(horizontalInput > 0)
         {
@@ -98,7 +103,6 @@ public class PlayerControler : MonoBehaviour
         {
             if(enemy.gameObject.CompareTag("Mimico"))
             {
-                //Destroy(enemy.gameObject);
                 Rigidbody2D enemyRigidbody = enemy.GetComponent<Rigidbody2D>();
                 enemyRigidbody.AddForce(transform.right + transform.up * 2, ForceMode2D.Impulse);
 
