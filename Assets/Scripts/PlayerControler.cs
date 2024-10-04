@@ -101,6 +101,9 @@ public class PlayerControler : MonoBehaviour
                 //Destroy(enemy.gameObject);
                 Rigidbody2D enemyRigidbody = enemy.GetComponent<Rigidbody2D>();
                 enemyRigidbody.AddForce(transform.right + transform.up * 2, ForceMode2D.Impulse);
+
+                Enemy enemyScript = enemy.GetComponent<Enemy>();
+                enemyScript.TakeDamage();
             }
         }
         
