@@ -47,20 +47,20 @@ public class PlayerControler : MonoBehaviour
 
         if(horizontalInput < 0)
         {
-            //if(isAttacking)
-            //{
+            if(isAttacking)
+            {
+                characterAnimator.SetTrigger("AttackAndRun");
+            }
             transform.rotation = Quaternion.Euler(0, 180, 0);
-            //}
-
             characterAnimator.SetBool("IsRunning", true);
         }
         else if(horizontalInput > 0)
         {
-            //if(isAttacking)
-            //{
-                transform.rotation = Quaternion.Euler(0, 0, 0);
-            //}
-
+            if(isAttacking)
+            {
+                characterAnimator.SetTrigger("AttackAndRun");
+            }
+            transform.rotation = Quaternion.Euler(0, 0, 0);
             characterAnimator.SetBool("IsRunning", true);
         }
         else
@@ -71,13 +71,13 @@ public class PlayerControler : MonoBehaviour
 
     void Jump()
     {
-        characterRigidbody.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);   //ButtonDown es para cuando lo pulsas
+        characterRigidbody.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);        //ButtonDown es para cuando lo pulsas
         characterAnimator.SetBool("IsJumping", true);
     }
 
     void FixedUpdate()
     {
-        characterRigidbody.velocity = new Vector2(horizontalInput * characterSpeed, characterRigidbody.velocity.y); // (1,x) = (lados,arriva) <-- [hay que añadir new] // tambien se puede poner directamente la dirección "right"
+        characterRigidbody.velocity = new Vector2(horizontalInput * characterSpeed, characterRigidbody.velocity.y);         // (1,x) = (lados,arriva) <-- [hay que añadir new] // tambien se puede poner directamente la dirección "right"
 
     }
     
@@ -87,8 +87,8 @@ public class PlayerControler : MonoBehaviour
         characterAnimator.SetTrigger("Attack");
     }
 
-    //co-rutina para que no salte mientras ataca
-    IEnumerator AttackAnimation()
+    
+    IEnumerator AttackAnimation()       //co-rutina para que no salte mientras ataca
     {
         isAttacking = true;
 
@@ -113,8 +113,7 @@ public class PlayerControler : MonoBehaviour
 
     void TakeDamage()
         {
-            healtPoints--; // -- es para que se resten de uno en uno y si quieres más sería -= x
-            
+            healtPoints--;          // -- es para que se resten de uno en uno y si quieres más sería -= x
 
             if(healtPoints <= 0)
             {
