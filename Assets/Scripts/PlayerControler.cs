@@ -39,6 +39,10 @@ public class PlayerControler : MonoBehaviour
             Attack();
         }
         
+        if(Input.GetKeyDown(KeyCode.P))
+        {
+            GameManager.instance.Pause();
+        }
     }
 
     void Movement()
