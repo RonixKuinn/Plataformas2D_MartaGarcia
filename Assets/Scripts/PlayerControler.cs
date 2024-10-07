@@ -43,29 +43,30 @@ public class PlayerControler : MonoBehaviour
 
     void Movement()
     {
-        horizontalInput = Input.GetAxis("Horizontal");
-
-        if(horizontalInput < 0)
-        {
-            if(isAttacking)
+        if(isAttacking && horizontalInput == 0)
             {
-                characterAnimator.SetTrigger("AttackAndRun");
-                characterAnimator.SetBool("IsRunning", false);
+                horizontalInput = 0;
             }
             else
             {
-                transform.rotation = Quaternion.Euler(0, 180, 0);
-                characterAnimator.SetBool("IsRunning", true);
+                horizontalInput = Input.GetAxis("Horizontal");
             }
+
+        if(horizontalInput < 0)
+        {
+            if(!isAttacking)
+            {
+                transform.rotation = Quaternion.Euler(0, 180, 0);
+            }
+            characterAnimator.SetBool("IsRunning", true);
             
         }
         else if(horizontalInput > 0)
         {
-            if(isAttacking)
+            if(!isAttacking)
             {
-                characterAnimator.SetTrigger("AttackAndRun");
+                transform.rotation = Quaternion.Euler(0, 0, 0);
             }
-            transform.rotation = Quaternion.Euler(0, 0, 0);
             characterAnimator.SetBool("IsRunning", true);
         }
         else
