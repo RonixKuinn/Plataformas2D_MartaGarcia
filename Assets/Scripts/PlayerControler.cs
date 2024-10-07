@@ -51,7 +51,6 @@ public class PlayerControler : MonoBehaviour
         if(isAttacking && horizontalInput == 0)
             {
                 horizontalInput = 0;
-                SoundManager.instance.PlaySFX(SoundManager.instance.runAudio);
             }
             else
             {
@@ -65,6 +64,7 @@ public class PlayerControler : MonoBehaviour
                 transform.rotation = Quaternion.Euler(0, 180, 0);
             }
             characterAnimator.SetBool("IsRunning", true);
+            //SoundManager.instance.PlaySFX(SoundManager.instance.runAudio);
             
         }
         else if(horizontalInput > 0)
@@ -74,6 +74,7 @@ public class PlayerControler : MonoBehaviour
                 transform.rotation = Quaternion.Euler(0, 0, 0);
             }
             characterAnimator.SetBool("IsRunning", true);
+            //SoundManager.instance.PlaySFX(SoundManager.instance.runAudio);
         }
         else
         {
