@@ -8,6 +8,12 @@ public class SoundManager : MonoBehaviour
     private AudioSource audioSource;
     public AudioClip coinAudio;
     public AudioClip jumpAudio;
+    public AudioClip hurtAudio;
+    public AudioClip dieAudio;
+    public AudioClip atackAudio;
+    public AudioClip enemyAudio;
+    public AudioClip pauseAudio;
+    public AudioClip runAudio;
 
     void Awake()
     {
