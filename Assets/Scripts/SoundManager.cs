@@ -5,8 +5,9 @@ using UnityEngine;
 public class SoundManager : MonoBehaviour
 {
     public static SoundManager instance;
-    [SerializeField] private AudioClip coinAudio;
     private AudioSource audioSource;
+    public AudioClip coinAudio;
+    public AudioClip jumpAudio;
 
     void Awake()
     {
@@ -22,8 +23,15 @@ public class SoundManager : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
     }
 
-    public void CoinSFX()
+    public void PlaySFX(AudioClip clip)
+    {
+        audioSource.PlayOneShot(clip);
+    }
+
+    /*public void CoinSFX()
     {
         audioSource.PlayOneShot(coinAudio);
-    }
+    }*/
 }
+
+//para usar los Managers hay que hacer un empty por cada uno y añadirle el script correspondiente

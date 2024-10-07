@@ -156,4 +156,4 @@ public class PlayerControler : MonoBehaviour
     
 }
 
-// Extension -- Night Pink (tiene murcielagos) // Pink Candy Theme (parece una nube rizada)
+// Extension -- Night Pink (tiene murcielagos) // Pink Candy Theme (parece una nube rizada)  //  Merko's green theme (octagono verde y blanco)
