@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour
         {
             Time.timeScale = 0;
             isPaused = true;
-            SoundManager.instance.PlaySFX(audioSource, SoundManager.instance.pauseAudio);
+            SoundManager.instance.PlaySFX(SoundManager.instance.audioSource, SoundManager.instance.pauseAudio);
         }
         else
         {

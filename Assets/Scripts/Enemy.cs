@@ -14,7 +14,7 @@ public class Enemy : MonoBehaviour
 
     void Start()
     {
-        SoundManager.instance.PlaySFX(audioSource, SoundManager.instance.mimicAudio);
+        SoundManager.instance.PlaySFX(SoundManager.instance.audioSource, SoundManager.instance.mimicAudio);
     }
 
     void Update()

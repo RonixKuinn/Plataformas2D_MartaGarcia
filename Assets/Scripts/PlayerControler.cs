@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerControler : MonoBehaviour
 {
     private AudioSource audioSource;
-    
+
     private Rigidbody2D characterRigidbody;
     public static Animator characterAnimator;
     private float horizontalInput;
@@ -88,7 +88,7 @@ public class PlayerControler : MonoBehaviour
     {
         characterRigidbody.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);        //ButtonDown es para cuando lo pulsas
         characterAnimator.SetBool("IsJumping", true);
-        SoundManager.instance.PlaySFX(audioSource, SoundManager.instance.jumpAudio);
+        SoundManager.instance.PlaySFX(SoundManager.instance.audioSource, SoundManager.instance.jumpAudio);
     }
 
     void FixedUpdate()
@@ -101,7 +101,7 @@ public class PlayerControler : MonoBehaviour
     {
         StartCoroutine(AttackAnimation());      //llamar a co-rutina
         characterAnimator.SetTrigger("Attack");
-        SoundManager.instance.PlaySFX(audioSource, SoundManager.instance.atackAudio);
+        SoundManager.instance.PlaySFX(SoundManager.instance.audioSource, SoundManager.instance.atackAudio);
     }
 
     
@@ -138,7 +138,7 @@ public class PlayerControler : MonoBehaviour
             else
             {
                 characterAnimator.SetTrigger("IsHurt");
-                SoundManager.instance.PlaySFX(audioSource, SoundManager.instance.hurtAudio);
+                SoundManager.instance.PlaySFX(SoundManager.instance.audioSource, SoundManager.instance.hurtAudio);
             }
         }
 
@@ -146,7 +146,7 @@ public class PlayerControler : MonoBehaviour
     {
         characterAnimator.SetBool("IsDead", true);
         Destroy(gameObject, 0.7f);
-        SoundManager.instance.PlaySFX(audioSource, SoundManager.instance.dieAudio);
+        SoundManager.instance.PlaySFX(SoundManager.instance.audioSource, SoundManager.instance.dieAudio);
     }
 
     void OnCollisionEnter2D(Collision2D collision)
