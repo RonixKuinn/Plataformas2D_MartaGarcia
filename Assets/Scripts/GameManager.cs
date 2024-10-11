@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    private AudioSource audioSource;
+    
     public static GameManager instance;
     private int coins = 0;
     private bool isPaused;
@@ -26,7 +28,7 @@ public class GameManager : MonoBehaviour
         {
             Time.timeScale = 0;
             isPaused = true;
-            SoundManager.instance.PlaySFX(SoundManager.instance.pauseAudio);
+            SoundManager.instance.PlaySFX(audioSource, SoundManager.instance.pauseAudio);
         }
         else
         {

@@ -5,7 +5,7 @@ using UnityEngine;
 public class SoundManager : MonoBehaviour
 {
     public static SoundManager instance;
-    private AudioSource audioSource;
+    public AudioSource audioSource;
     public AudioClip coinAudio;
     public AudioClip jumpAudio;
     public AudioClip hurtAudio;
@@ -13,7 +13,8 @@ public class SoundManager : MonoBehaviour
     public AudioClip atackAudio;
     public AudioClip enemyAudio;
     public AudioClip pauseAudio;
-    public AudioClip runAudio;
+    //public AudioClip runAudio;
+    public AudioClip mimicAudio;
 
     void Awake()
     {
@@ -29,9 +30,9 @@ public class SoundManager : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
     }
 
-    public void PlaySFX(AudioClip clip)
+    public void PlaySFX(AudioSource source, AudioClip clip)
     {
-        audioSource.PlayOneShot(clip);
+        source.PlayOneShot(clip);
     }
 
     /*public void CoinSFX()
