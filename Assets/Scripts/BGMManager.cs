@@ -19,6 +19,8 @@ public class BGMManager : MonoBehaviour
             instance = this;
         }
         audioSource = GetComponent<AudioSource>();
+
+        //audioSource.loop = true;
     }
 
     public void PlayBGM(AudioClip clip)
@@ -26,4 +28,9 @@ public class BGMManager : MonoBehaviour
         audioSource.clip = clip;
         audioSource.Play();
     }
+
+    /*public void PauseBGM();
+    {
+        audioSource.Pause();
+    }*/
 }
