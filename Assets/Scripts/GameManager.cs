@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
     private int coins = 0;
     private bool isPaused;
+    [SerializeField] GameObject pauseCanvas;
 
     void Awake()
     {
@@ -29,11 +30,13 @@ public class GameManager : MonoBehaviour
             Time.timeScale = 0;
             isPaused = true;
             SoundManager.instance.PlaySFX(SoundManager.instance.audioSource, SoundManager.instance.pauseAudio);
+            pauseCanvas.SetActive(true);
         }
         else
         {
             Time.timeScale = 1;
             isPaused = false;
+            pauseCanvas.SetActive(false);
         }
     }
 
