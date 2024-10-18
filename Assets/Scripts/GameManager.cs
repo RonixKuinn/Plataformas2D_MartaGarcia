@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     private bool isPaused;
     [SerializeField] GameObject pauseCanvas;
     [SerializeField] Text coinText;
+    [SerializeField] Animator pausePanelAnimator;
 
     void Awake()
     {
@@ -23,12 +24,15 @@ public class GameManager : MonoBehaviour
         {
             instance = this;
         }
+
+        pausePanelAnimator = pauseCanvas.GetComponentInChildren<Animator>();
     }
 
     public void Pause()
     {
         if(!isPaused)
         {
+
             Time.timeScale = 0;
             isPaused = true;
             SoundManager.instance.PlaySFX(SoundManager.instance.audioSource, SoundManager.instance.pauseAudio);
@@ -36,10 +40,17 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            Time.timeScale = 1;
-            isPaused = false;
-            pauseCanvas.SetActive(false);
+            StartCoroutine(ClosePauseAnimation());
         }
+    }
+
+    IEnumerator ClosePauseAnimation()
+    {
+        pausePanelAnimator.SetBool("Close", true);
+        yield return new WaitForSecondsRealtime(0.20f);
+        Time.timeScale = 1;
+        isPaused = false;
+        pauseCanvas.SetActive(false);
     }
 
     public void AddCoin()

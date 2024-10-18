@@ -153,6 +153,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pauseCanvas: {fileID: 975080096}
   coinText: {fileID: 300597443}
+  pausePanelAnimator: {fileID: 0}
 --- !u!4 &22337620
 Transform:
   m_ObjectHideFlags: 0
