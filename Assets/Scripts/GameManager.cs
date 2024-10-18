@@ -75,8 +75,8 @@ public class GameManager : MonoBehaviour
         healtBar.value = health;
     }
 
-    public void SceneLoader(string sceneName)
+    public void SceneLoader(string scene)
     {
-        SceneManagemer.LoadScene(sceneName);
+        SceneManager.LoadScene(scene);
     }
 }
