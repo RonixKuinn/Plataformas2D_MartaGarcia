@@ -12,10 +12,10 @@ public class PlayerControler : MonoBehaviour
     private bool isAttacking;
     [SerializeField]private float jumpForce = 5;
     [SerializeField]private float characterSpeed = 4.5f;    // "[SerializeField]" es para que se vea en el inspector //la f solo se pone con decimales
-    [SerializeField]private int currentHealth;
+    [SerializeField]public int currentHealth {get; private set;}
     [SerializeField]private Transform attackHitBox;
     [SerializeField]private float attackRadius;
-    [SerializeField]private int maxHealth = 5;
+    [SerializeField]public int maxHealth {get; private set;} = 5;
 
     void Awake()
     {
@@ -150,6 +150,12 @@ public class PlayerControler : MonoBehaviour
     public void AddHealth()
     {
         currentHealth++;
+
+        if(currentHealth > maxHealth)
+        {
+            currentHealth = maxHealth;
+        }
+
         GameManager.instance.UpdateHealthBar(currentHealth);
     }
 

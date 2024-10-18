@@ -6,6 +6,7 @@ public class Heart : MonoBehaviour
 {
     private PlayerControler playerScript;
     private bool interactable;
+    [SerializeField]private int health = 1;
     
     void Update()
     {
@@ -25,6 +26,10 @@ public class Heart : MonoBehaviour
         {
             interactable = true;
             playerScript = collider.gameObject.GetComponent<PlayerControler>();
+            if(playerScript.currentHealth < playerScript.maxHealth)
+            {
+                //playerScript.AddHealth(health);
+            }
         }
     }
 

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -72,5 +73,10 @@ public class GameManager : MonoBehaviour
     public void UpdateHealthBar(int health)
     {
         healtBar.value = health;
+    }
+
+    public void SceneLoader(string sceneName)
+    {
+        SceneManagemer.LoadScene(sceneName);
     }
 }
