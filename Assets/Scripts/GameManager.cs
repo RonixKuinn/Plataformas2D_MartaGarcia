@@ -13,7 +13,8 @@ public class GameManager : MonoBehaviour
     private bool pauseAnimation;
     [SerializeField] GameObject pauseCanvas;
     [SerializeField] Text coinText;
-    [SerializeField] Animator pausePanelAnimator;
+    [SerializeField]private Animator pausePanelAnimator;
+    [SerializeField]private Slider healtBar;
 
     void Awake()
     {
@@ -60,5 +61,16 @@ public class GameManager : MonoBehaviour
     {
         coins++;        //es lo mismo que "coin +=1;"
         coinText.text = coins.ToString();
+    }
+
+    public void SetHealthBar(int maxHealth)
+    {
+        healtBar.maxValue = maxHealth;
+        healtBar.value = maxHealth;
+    }
+
+    public void UpdateHealthBar(int health)
+    {
+        healtBar.value = health;
     }
 }

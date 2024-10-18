@@ -12,9 +12,10 @@ public class PlayerControler : MonoBehaviour
     private bool isAttacking;
     [SerializeField]private float jumpForce = 5;
     [SerializeField]private float characterSpeed = 4.5f;    // "[SerializeField]" es para que se vea en el inspector //la f solo se pone con decimales
-    [SerializeField]private int healtPoints = 5;
+    [SerializeField]private int currentHealth;
     [SerializeField]private Transform attackHitBox;
     [SerializeField]private float attackRadius;
+    [SerializeField]private int maxHealth = 5;
 
     void Awake()
     {
@@ -25,6 +26,8 @@ public class PlayerControler : MonoBehaviour
     void Start()
     {
         //characterRigidbody.AddForce(Vector2.up * jumpForce);
+        currentHealth = maxHealth;
+        GameManager.instance.SetHealthBar(maxHealth);
     }
 
     void Update()
@@ -127,19 +130,28 @@ public class PlayerControler : MonoBehaviour
     }
 
     void TakeDamage()
-        {
-            healtPoints--;          // -- es para que se resten de uno en uno y si quieres más sería -= x
+    {
+        currentHealth--;          // -- es para que se resten de uno en uno y si quieres más sería -= x
 
-            if(healtPoints <= 0)
-            {
-                Die();
-            }
-            else
-            {
-                characterAnimator.SetTrigger("IsHurt");
-                SoundManager.instance.PlaySFX(SoundManager.instance.audioSource, SoundManager.instance.hurtAudio);
-            }
+        GameManager.instance.UpdateHealthBar(currentHealth);
+        
+        if(currentHealth <= 0)
+        {
+            Die();
         }
+        else
+        {
+            characterAnimator.SetTrigger("IsHurt");
+            SoundManager.instance.PlaySFX(SoundManager.instance.audioSource, SoundManager.instance.hurtAudio);
+        }
+
+    }
+
+    public void AddHealth()
+    {
+        currentHealth++;
+        GameManager.instance.UpdateHealthBar(currentHealth);
+    }
 
     void Die()
     {
