@@ -712,6 +712,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7b80bde913aa12419c5d1fc5f054964, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  starCanvas: {fileID: 0}
 --- !u!61 &540151474
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5650,6 +5651,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1698871728 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6672293290968317477, guid: 4617efdbcc8e0bd438bc583228b8de52, type: 3}
+  m_PrefabInstance: {fileID: 2747134365785399187}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1698871732
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1698871728}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f0000bb18ec89f14085c1da876c45b1d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 2
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1724387375
 GameObject:
   m_ObjectHideFlags: 0
@@ -6686,10 +6713,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pause Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 8669964314925201755, guid: 4617efdbcc8e0bd438bc583228b8de52, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6672293290968317477, guid: 4617efdbcc8e0bd438bc583228b8de52, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1698871732}
   m_SourcePrefab: {fileID: 100100000, guid: 4617efdbcc8e0bd438bc583228b8de52, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
