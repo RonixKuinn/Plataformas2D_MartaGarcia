@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
     private int coins = 0;
     private bool isPaused;
+    private bool pauseAnimation;
     [SerializeField] GameObject pauseCanvas;
     [SerializeField] Text coinText;
     [SerializeField] Animator pausePanelAnimator;
@@ -30,16 +31,16 @@ public class GameManager : MonoBehaviour
 
     public void Pause()
     {
-        if(!isPaused)
+        if(!isPaused && !pauseAnimation)
         {
-
-            Time.timeScale = 0;
             isPaused = true;
+            Time.timeScale = 0;
             SoundManager.instance.PlaySFX(SoundManager.instance.audioSource, SoundManager.instance.pauseAudio);
             pauseCanvas.SetActive(true);
         }
-        else
+        else if(isPaused && !pauseAnimation)
         {
+            pauseAnimation = true;
             StartCoroutine(ClosePauseAnimation());
         }
     }
@@ -49,8 +50,10 @@ public class GameManager : MonoBehaviour
         pausePanelAnimator.SetBool("Close", true);
         yield return new WaitForSecondsRealtime(0.20f);
         Time.timeScale = 1;
-        isPaused = false;
+       
         pauseCanvas.SetActive(false);
+        isPaused = false;
+        pauseAnimation = false;
     }
 
     public void AddCoin()
