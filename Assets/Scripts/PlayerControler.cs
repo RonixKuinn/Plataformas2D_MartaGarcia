@@ -18,6 +18,8 @@ public class PlayerControler : MonoBehaviour
     [SerializeField]private float attackRadius;
     [SerializeField]public int maxHealth {get; private set;} = 5;
 
+    public static PlayerControler instance;
+
     void Awake()
     {
         characterRigidbody = GetComponent<Rigidbody2D>();
@@ -186,6 +188,16 @@ public class PlayerControler : MonoBehaviour
     {
         //WaitForSecondsRealtime(0.12);
         SceneManager.LoadScene("Game Over");
+    }
+
+    void OnTriggerEnter2D(Collider2D collider)
+    {
+        if(collider.gameObject.CompareTag("Vacio"))
+        {
+            Destroy(gameObject);
+            Die();
+            LoadGameOver();
+        }
     }
 }
 
