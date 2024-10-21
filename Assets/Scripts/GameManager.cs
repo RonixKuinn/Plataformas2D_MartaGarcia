@@ -62,6 +62,11 @@ public class GameManager : MonoBehaviour
     {
         coins++;        //es lo mismo que "coin +=1;"
         coinText.text = coins.ToString();
+        
+        if(coins = 4)
+        {
+            LoadVictory();
+        }
     }
 
     public void SetHealthBar(int maxHealth)
@@ -78,5 +83,11 @@ public class GameManager : MonoBehaviour
     public void SceneLoader(string scene)
     {
         SceneManager.LoadScene(scene);
+    }
+
+    public void LoadVictory()
+    {
+        //WaitForSecondsRealtime(0.12);
+        SceneManager.LoadScene("Victory");
     }
 }
