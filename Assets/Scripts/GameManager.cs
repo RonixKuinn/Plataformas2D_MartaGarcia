@@ -63,10 +63,10 @@ public class GameManager : MonoBehaviour
         coins++;        //es lo mismo que "coin +=1;"
         coinText.text = coins.ToString();
         
-        if(coins = 4)
+        /*if(coins = 4)
         {
             LoadVictory();
-        }
+        }*/
     }
 
     public void SetHealthBar(int maxHealth)
