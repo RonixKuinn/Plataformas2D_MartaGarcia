@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerControler : MonoBehaviour
 {
@@ -138,6 +139,7 @@ public class PlayerControler : MonoBehaviour
         if(currentHealth <= 0)
         {
             Die();
+            LoadGameOver();
         }
         else
         {
@@ -180,6 +182,11 @@ public class PlayerControler : MonoBehaviour
         Gizmos.DrawWireSphere(attackHitBox.position, attackRadius);
     }
     
+    public void LoadGameOver()
+    {
+        //WaitForSecondsRealtime(0.12);
+        SceneManager.LoadScene("Game Over");
+    }
 }
 
 // Extension -- Night Pink (tiene murcielagos) // Pink Candy Theme (parece una nube rizada)  //  Merko's green theme (octagono verde y blanco)
